@@ -41,7 +41,7 @@ if (reseed) { recreateDB(); }
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-//var dressRouter = require('./routes/house');
+var dressRouter = require('./routes/dress');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
 var resourceRouter = require('./routes/resource');
@@ -61,7 +61,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-//app.use('/dress', dressRouter);
+app.use('/dress', dressRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
 app.use('/resource', resourceRouter);
