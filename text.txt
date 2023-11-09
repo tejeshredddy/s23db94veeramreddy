@@ -1,5 +1,0 @@
-app.use('/dress', dressRouter);
-app.use('/board', boardRouter);
-
-var dressRouter = require('./routes/dress');
-var boardRouter = require('./routes/board');
