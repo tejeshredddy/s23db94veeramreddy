@@ -58,30 +58,39 @@ exports.dress_create_post = async function (req, res) {
     }
 };
 // Handle dress delete form on DELETE.
-exports.dress_delete = function (req, res) {
-    res.send('NOT IMPLEMENTED: dress delete DELETE ' + req.params.id);
+// Handle Costume delete on DELETE.
+exports.dress_delete = async function (req, res) {
+    console.log("delete " + req.params.id)
+    try {
+        result = await dress.findByIdAndDelete(req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
 };
 // Handle dress update form on PUT.
 exports.dress_update_put = function (req, res) {
     res.send('NOT IMPLEMENTED: dress update PUT' + req.params.id);
 };
 //Handle Costume update form on PUT.
-exports.dress_update_put = async function(req, res) {
-console.log(`update on id ${req.params.id} with body
+exports.dress_update_put = async function (req, res) {
+    console.log(`update on id ${req.params.id} with body
 ${JSON.stringify(req.body)}`)
-try {
-let toUpdate = await dress.findById( req.params.id)
-// Do updates of properties
-if(req.body.dress_type)
-toUpdate.dress_type = req.body.dress_type;
-if(req.body.cost) toUpdate.cost = req.body.cost;
-if(req.body.size) toUpdate.size = req.body.size;
-let result = await toUpdate.save();
-console.log("Sucess " + result)
-res.send(result)
-} catch (err) {
-res.status(500)
-res.send(`{"error": ${err}: Update for id ${req.params.id}
+    try {
+        let toUpdate = await dress.findById(req.params.id)
+        // Do updates of properties
+        if (req.body.dress_type)
+            toUpdate.dress_type = req.body.dress_type;
+        if (req.body.cost) toUpdate.cost = req.body.cost;
+        if (req.body.size) toUpdate.size = req.body.size;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id}
 failed`);
-}
+    }
 };
