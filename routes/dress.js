@@ -7,4 +7,4 @@ module.exports = router;
 // GET request for one dress.
 router.get('/dress/:id', dress_controllers.dress_detail);
 //put request for one dress
-router.put('/dress/:id', dress_controllers.dress_update_put)
+router.put('/dress/:id', dress_controllers.dress_update_put);
