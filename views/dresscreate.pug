@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  h1= title
+
+  form(id='dressForm', action="/resource/dress", method="POST")
+    div.form-group
+      label.dressAttr(for='dress_type') dress type
+      input#dress_type(type='text', name='dress_type')
+
+    div.form-group
+      label.dressAttr(for='size') dress size
+      input#size(type='text', name='size')
+
+    div.form-group
+      label.dressAttr(for='cost') dress cost
+      input#cost(type='number', name='cost')
+
+    input(type="submit")
+
+  script.
+    document.forms['dressForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      // TODO: Show loading spinner or some indication of form submission
+
+      fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      })
+      .then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      })
+      .then((body) => {
+        // TODO: Update UI or provide feedback to the user
+        alert("Save succeeded");
+      })
+      .catch((error) => {
+        // TODO: Log detailed error information
+        alert("Save failed: " + error);
+      });
+    });

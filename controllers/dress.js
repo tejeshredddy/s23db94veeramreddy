@@ -24,7 +24,7 @@ exports.dress_view_all_Page = async function (req, res) {
         res.send(`{"error": ${err}}`);
     }
 };
-
+// Handle a show one view with id specified by query
 exports.dress_view_one_Page = async function (req, res) {
     console.log("single view for id " + req.query.id)
     try {
@@ -38,7 +38,7 @@ exports.dress_view_one_Page = async function (req, res) {
     }
 };
 // for a specific dress.
-// for a specific Costume.
+// for a specific dress.
 exports.dress_detail = async function (req, res) {
     console.log("detail" + req.params.id)
     try {
@@ -70,8 +70,21 @@ exports.dress_create_post = async function (req, res) {
         res.send(`{"error": ${err}}`);
     }
 };
+// Handle building the view for creating a dress.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.dress_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('dresscreate', { title: 'dress Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
 // Handle dress delete form on DELETE.
-// Handle Costume delete on DELETE.
+// Handle dress delete on DELETE.
 exports.dress_delete = async function (req, res) {
     console.log("delete " + req.params.id)
     try {
@@ -87,7 +100,7 @@ exports.dress_delete = async function (req, res) {
 exports.dress_update_put = function (req, res) {
     res.send('NOT IMPLEMENTED: dress update PUT' + req.params.id);
 };
-//Handle Costume update form on PUT.
+//Handle dress update form on PUT.
 exports.dress_update_put = async function (req, res) {
     console.log(`update on id ${req.params.id} with body
 ${JSON.stringify(req.body)}`)
