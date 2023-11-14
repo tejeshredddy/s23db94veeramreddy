@@ -24,6 +24,19 @@ exports.dress_view_all_Page = async function (req, res) {
         res.send(`{"error": ${err}}`);
     }
 };
+
+exports.dress_view_one_Page = async function (req, res) {
+    console.log("single view for id " + req.query.id)
+    try {
+        result = await dress.findById( req.query.id)
+        res.render('dressdetail',
+            { title: 'dress Detail', toShow: result });
+    }
+    catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    }
+};
 // for a specific dress.
 // for a specific Costume.
 exports.dress_detail = async function (req, res) {

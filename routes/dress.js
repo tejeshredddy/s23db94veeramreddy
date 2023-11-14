@@ -10,3 +10,6 @@ router.get('/dress/:id', dress_controllers.dress_detail);
 router.put('/dress/:id', dress_controllers.dress_update_put);
 //delete request for one dress
 router.delete('/dress/:id', dress_controllers.dress_delete);
+
+// GET detail dress page//
+router.get('/detail', dress_controllers.dress_view_one_Page);
