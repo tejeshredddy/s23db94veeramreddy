@@ -10,8 +10,6 @@ exports.dress_list = async function (req, res) {
         res.send(`{"error": ${err}}`);
     }
 };
-
-
 // VIEWS
 // Handle a show all view
 exports.dress_view_all_Page = async function (req, res) {
@@ -83,6 +81,21 @@ exports.dress_create_Page = function(req, res) {
     res.send(`{'error': '${err}'}`);
     }
    };
+
+// Handle building the view for updating a dress.
+// query provides the id
+exports.dress_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+    let result = await dress.findById(req.query.id)
+    res.render('dressupdate', { title: 'dress Update', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
+
 // Handle dress delete form on DELETE.
 // Handle dress delete on DELETE.
 exports.dress_delete = async function (req, res) {
@@ -96,6 +109,22 @@ exports.dress_delete = async function (req, res) {
         res.send(`{"error": Error deleting ${err}}`);
     }
 };
+
+// Handle a delete one view with id from query
+exports.dress_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await dress.findById(req.query.id)
+    res.render('dressdelete', { title: 'dress Delete', toShow:
+   result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+
 // Handle dress update form on PUT.
 exports.dress_update_put = function (req, res) {
     res.send('NOT IMPLEMENTED: dress update PUT' + req.params.id);
