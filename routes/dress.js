@@ -14,7 +14,10 @@ router.delete('/dress/:id', dress_controllers.dress_delete);
 router.get('/detail', dress_controllers.dress_view_one_Page);
 /* GET create dress page */
 router.get('/create', dress_controllers.dress_create_Page);
-
 /* GET create update page */
 router.get('/update', dress_controllers.dress_update_Page);
+
+/* GET delete costume page */
+router.get('/delete', dress_controllers.dress_delete_Page);
+
 

@@ -1,0 +1,49 @@
+extends layout
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let dressid = toShow._id
+    - let dress_type = toShow.dress_type
+    - let dresscost = toShow.cost
+    - let dresssize = toShow.size
+    - let actionid = "/resource/dress/" + dressid
+    script let actionid = "#{actionid}"
+    div
+      div.row
+        div(class='dressAttr mr-3') dress ID is:
+        div #{dressid}
+      div.row
+        div(class='dressAttr mr-3') dress Type is:
+        div #{dress_type}
+      div.row
+        div(class='dressAttr mr-3') dress Size is:
+        div #{dresssize}
+      div.row
+        div(class='dressAttr mr-3') dress Cost is:
+        div #{dresscost}
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+  script.
+    function cancel() {
+      // Go back to the home page for the dress collection
+      window.location.href='/dress'
+    }
+  script.
+    function deleteOnid() {
+      console.log("starting delete")
+      // delete first
+      fetch(actionid, {
+        method: 'DELETE'
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Delete succeded")
+        window.location.href='/dress'
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Delete failed " + error )
+      });
+    }
