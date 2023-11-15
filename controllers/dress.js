@@ -22,6 +22,7 @@ exports.dress_view_all_Page = async function (req, res) {
         res.send(`{"error": ${err}}`);
     }
 };
+
 // Handle a show one view with id specified by query
 exports.dress_view_one_Page = async function (req, res) {
     console.log("single view for id " + req.query.id)
@@ -47,6 +48,7 @@ exports.dress_detail = async function (req, res) {
         res.send(`{"error": document for id ${req.params.id} not found`);
     }
 };
+
 // Handle derss create on POST.
 // Handle derss create on POST.
 exports.dress_create_post = async function (req, res) {
@@ -68,6 +70,7 @@ exports.dress_create_post = async function (req, res) {
         res.send(`{"error": ${err}}`);
     }
 };
+
 // Handle building the view for creating a dress.
 // No body, no in path parameter, no query.
 // Does not need to be async
@@ -124,11 +127,11 @@ exports.dress_delete_Page = async function(req, res) {
     }
    };
 
-
 // Handle dress update form on PUT.
 exports.dress_update_put = function (req, res) {
     res.send('NOT IMPLEMENTED: dress update PUT' + req.params.id);
 };
+
 //Handle dress update form on PUT.
 exports.dress_update_put = async function (req, res) {
     console.log(`update on id ${req.params.id} with body
