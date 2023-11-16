@@ -1,20 +1,27 @@
 extends layout
+
 block content
- h1= title
- - let dressid = toShow._id
- - let dress_type = toShow.dress_type
- - let dresscost = toShow.cost
- - let dresssize = toShow.size
- div
- div.row
- div(class='dressAttr mr-3') dress ID is:
- div #{dressid}
- div.row
- div(class='dressAttr mr-3') dress Type is:
- div #{dress_type}
- div.row
- div(class='dressAttr mr-3') dress Size is:
- div #{dresssize}
- div.row
- div(class='dressAttr mr-3') dress Cost is:
- div #{dresscost}
+  .dress-details-container
+    h1= title
+
+    if toShow == null
+      h2 No instance to delete
+    else
+      - let dressid = toShow._id
+      - let dress_type = toShow.dress_type
+      - let dresscost = toShow.cost
+      - let dresssize = toShow.size
+
+      .dress-details
+        .row
+          .dressAttr.mr-3 Dress ID:
+            div #{dressid}
+        .row
+          .dressAttr.mr-3 Dress Type:
+            div #{dress_type}
+        .row
+          .dressAttr.mr-3 Dress Size:
+            div #{dresssize}
+        .row
+          .dressAttr.mr-3 Dress Cost:
+            div #{dresscost}
