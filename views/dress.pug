@@ -1,6 +1,18 @@
-each item in thedress 
-  div
-    p dress _Type - #{item.dress_type}
-    p Size - #{item.size}
-    p Cost - #{item.cost}
-    br
+extends layout
+block content
+  h1= title
+  - let items = results
+  each item in thedress
+    - let destination = `dispatch("/dress/update?id=${item._id}")`
+    div
+      p dress_Type - #{item.dress_Type}
+      p Size - #{item.size}
+      p Cost - #{item.cost}
+      button.btn(class="btn-primary ml-1", onclick=destination) Update
+      br
+      br
+
+  script.
+    function dispatch(path) {
+      window.location.href = path;
+    }
