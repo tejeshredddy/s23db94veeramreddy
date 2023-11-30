@@ -1,58 +1,23 @@
 extends layout
 block content
- h1.text-center= title
- form(id='dressForm', action="/resource/dresss", method="POST")
-  .card.mx-auto.mt-5
-   .card-body.text-center
-    div.row(class= 'mb-2')
-     div.col-3.text-right
-      label.dressAttr(for='dress_type') dress_type:
-      br
-      input#dress_type(type='text', name='dress_type', value="")
-     div.col-3.text-right
-      label.dressAttr(for='size') size:
-      br
-      input#feature(type='text', name='size', value="")
-     div.col-3.text-right
-      label.dressAttr(for='cost') cost(0 to 500):
-      br
-      input#cost(type='number', step= "any", name='cost', value="" )
-      br
-      br
-    div.text-center
-     input(type="submit" class="btn btn-primary" value="Submit")
-     button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+ h1= title
+ - let items = results;
+ - let destination = `dispatch("/dress/create")`
+   button.btn( class="btn-primary ml-1", onclick= destination) Create dress
+   each item in items
+    - let destination1 = `dispatch("/dress/update?id=${item._id}")`
+    - let destination2 = `dispatch("/dress/detail?id=${item._id}")`
+    - let destination3 = `dispatch("/dress/delete?id=${item._id}")`
+      div
+       p dress_type  - #{item.dress_type}
+       p size  - #{item.size}
+       p cost - #{item.cost}
+       button.btn( class="btn-primary ml-1", onclick= destination1) Update
+       button.btn( class="btn-primary ml-1", onclick= destination2) Detail
+       button.btn( class="btn-primary ml-1", onclick= destination3) Delete
+       br
+       br
  script.
-  function cancel() {
-    // Go back to the home page for the dress collection
-    window.location.href='/dresss'
+  function dispatch(path){
+   window.location.href=path
   }
-  document.forms['dressForm'].addEventListener('submit', (event) => {
-   event.preventDefault();
-   // TODO do something here to show user that form is being submitted
-   fetch(event.target.action, {
-    method: 'POST',
-    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-   }).then((response) => {
-    if(response.ok){
-      alert('dress Created Successfully!')
-      document.getElementById('dressForm').reset()
-    }
-    else{
-      alert('Failed to create dress. Please try again.');
-    }
-   }).then((body) => {
-    console.log(body);
-    // TODO handle body
-   }).catch((error) => {
-    console.log('Error:', error);
-    // TODO handle error
-    alert("Save failed " + error );
-   });
-  });
- style.
-  .dressAttr {
-   background-color: aquamarine;
-   width: 120px;
-  }
- 
